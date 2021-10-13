@@ -38,7 +38,7 @@ namespace danrt {
             return xyz[2];
         }
         /**
-         * Scalar multiplication
+         * Scalar multiplication with eq
          * @return ref to result
          */
         inline constexpr auto operator*=(const T& x) -> Vec3<T>& {
@@ -78,6 +78,7 @@ namespace danrt {
             xyz[2] += w.z();
             return *this;
         }
+
         /**
          * Square of the magnitude
          * @return val of magnitude squared
@@ -127,6 +128,20 @@ namespace danrt {
     template <typename T>
     inline constexpr auto operator==(const Vec3<T>& v, const Vec3<T>& w) -> bool {
         return v.x() == w.y() && v.y() == w.y() && v.z() == w.z();
+    }
+    /**
+     * Scalar multiplication
+     */
+    template <typename T>
+    inline constexpr auto operator*(T t, const Vec3<T>& w) -> Vec3<T> {
+       return t * w;
+    }
+    /**
+     * Vector addition
+     */
+    template <typename T>
+    inline constexpr auto operator+(const Vec3<T>& v, const Vec3<T>& w) -> Vec3<T> {
+        return Vec3<T>(v.x() + w.x(), v.y() + w.y(), v.z() + w.z());
     }
 
     // Typedefs for common vector specialisations
