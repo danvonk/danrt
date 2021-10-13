@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dan/dev/danrt/src/util/color.cpp
+color.h
+/home/dan/dev/danrt/src/util/color.h
+
+/home/dan/dev/danrt/src/util/color.h
+iostream
+-
+vec3.h
+/home/dan/dev/danrt/src/util/vec3.h
+
+/home/dan/dev/danrt/src/util/vec3.h
+array
+-
+complex
+-
+cmath
+-
+

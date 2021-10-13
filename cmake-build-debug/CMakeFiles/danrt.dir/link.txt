@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/danrt.dir/src/main.cpp.o CMakeFiles/danrt.dir/src/util/color.cpp.o CMakeFiles/danrt.dir/src/util/ray.cpp.o -o danrt 
