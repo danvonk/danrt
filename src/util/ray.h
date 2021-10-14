@@ -10,7 +10,10 @@
 namespace danrt {
     class Ray {
     public:
-        Ray();
+        Ray(const Vec3f& o, const Vec3f& d)
+        : origin_(o)
+        , dir_(d)
+        {}
 
         [[nodiscard]] auto origin() const-> Vec3f {
             return origin_;
@@ -20,6 +23,11 @@ namespace danrt {
             return dir_;
         }
 
+        /**
+         * Returns a point along the ray
+         * @param t scalar multiple of dir
+         * @return point along ray
+         */
         inline auto at(double t) -> Vec3f {
             return origin_ + t * dir_;
         }

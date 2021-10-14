@@ -6,11 +6,12 @@
 #define DANRT_VEC3_H
 
 #include <array>
-#include <complex>
+#include <concepts>
 #include <cmath>
 
+
 namespace danrt {
-    template <typename T>
+    template <std::floating_point T>
     class Vec3 {
     public:
         explicit Vec3(T x = T(), T y = T(), T z = T())
@@ -62,9 +63,9 @@ namespace danrt {
          * @return ref to result
          */
         inline constexpr auto operator-() -> Vec3<T>& {
-            xyz[0] *= -T();
-            xyz[1] *= -T();
-            xyz[2] *= -T();
+            xyz[0] = -xyz[0];
+            xyz[1] = -xyz[1];
+            xyz[2] = -xyz[2];
             return *this;
         }
         /**
@@ -93,13 +94,7 @@ namespace danrt {
         inline constexpr auto length() const -> T {
             return std::sqrt(length_squared());
         }
-        /**
-         * Scalar product
-         * @return val of scalar (dot) product
-         */
-        inline constexpr auto dot(const Vec3<T>& v, const Vec3<T>& w) const -> T {
-            return v.x() * w.x() + v.y() * w.y() + v.z() * w.z();
-        }
+
         /**
          * Cross product
          * @return val of cross product
@@ -109,13 +104,7 @@ namespace danrt {
                            v.z() * w.x() - v.x() * w.z(),
                            v.x() * w.y() - v.y() * w.x());
         }
-        /**
-         * Unit vector
-         * @return val of unit vector
-         */
-        inline constexpr auto unit_vec(Vec3<T> v) -> Vec3<T> {
-            return std::move(v / v.length());
-        }
+
 
     private:
         std::array<T, 3> xyz;
@@ -134,7 +123,11 @@ namespace danrt {
      */
     template <typename T>
     inline constexpr auto operator*(T t, const Vec3<T>& w) -> Vec3<T> {
-       return t * w;
+       return Vec3<T>(t * w.x(), t * w.y(), t * w.z());
+    }
+    template <typename T>
+    inline constexpr auto operator*(const Vec3<T>& w, T t) -> Vec3<T> {
+        return t * w;
     }
     /**
      * Vector addition
@@ -143,7 +136,37 @@ namespace danrt {
     inline constexpr auto operator+(const Vec3<T>& v, const Vec3<T>& w) -> Vec3<T> {
         return Vec3<T>(v.x() + w.x(), v.y() + w.y(), v.z() + w.z());
     }
-
+    template <typename T>
+    inline constexpr auto operator-(const Vec3<T>& v) -> Vec3<T> {
+        return Vec3<T>(v.x() * -T(), v.y() * -T(), v.z() * -T());
+    }
+    /**
+     * Vector subtraction
+     */
+    template <typename T>
+    inline constexpr auto operator-(const Vec3<T>& v, const Vec3<T>& w) -> Vec3<T> {
+        return Vec3<T>(v.x() - w.x(), v.y() - w.y(), v.z() - w.z());
+    }
+    template <typename T>
+    inline constexpr auto operator/(const Vec3<T>& v, T x) -> Vec3<T> {
+        return (1/x) * v;
+    }
+    /**
+     * Unit vector
+     * @return val of unit vector
+     */
+    template <typename T>
+    inline constexpr auto unit_vec(const Vec3<T>& v) -> Vec3<T> {
+        return (v / v.length());
+    }
+    /**
+     * Scalar product
+     * @return val of scalar (dot) product
+     */
+     template <typename T>
+    inline constexpr auto dot(const Vec3<T>& v, const Vec3<T>& w) -> T {
+        return v.x() * w.x() + v.y() * w.y() + v.z() * w.z();
+    }
     // Typedefs for common vector specialisations
     using Vec3f = Vec3<double>;
 }
