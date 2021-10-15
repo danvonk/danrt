@@ -4,4 +4,7 @@ project(danrt)
 set(CMAKE_CXX_STANDARD 20)
 add_compile_options(-Wall -Wextra -Werror -Wpedantic)
 
-add_executable(danrt src/main.cpp src/util/vec3.h src/util/color.h src/util/color.cpp src/util/ray.cpp src/util/ray.h)
+add_executable(danrt src/main.cpp
+        src/util/vec3.h src/util/color.h
+        src/util/color.cpp src/util/ray.cpp
+        src/util/ray.h src/util/hittable.h src/util/sphere.h src/util/sphere.cpp)

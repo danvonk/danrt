@@ -2,24 +2,30 @@
 #include "util/vec3.h"
 #include "util/color.h"
 #include "util/ray.h"
+#include "util/sphere.h"
 
 using namespace danrt;
 
-auto hit_sphere(const Vec3f& cent, double rad, const Ray& ray) -> bool {
+auto hit_sphere(const Vec3f& cent, double rad, const Ray& ray) -> double {
     const auto origin_to_centre = ray.origin() - cent;
     const auto a = dot(ray.dir(), ray.dir());
-    const auto b = 2.0 * dot(origin_to_centre, ray.dir());
-    const auto c = dot(origin_to_centre, origin_to_centre) - rad * rad;
-    const auto discr = b * b - 4 * a * c;
-    return (discr > 0);
+    const auto half_b = dot(origin_to_centre, ray.dir());
+    const auto c = origin_to_centre.length_squared() - rad * rad;
+    const auto discr = half_b * half_b - 4 * a * c;
+    if (discr < 0) {
+        return -1.0;
+    } else {
+        return (-half_b - std::sqrt(discr)) / (2.0 * a);
+    }
 }
 auto ray_color(const Ray& ray) -> Vec3f {
-    if (hit_sphere(Vec3f(0.0, 0.0, -1.0), 0.5, ray)) {
-        return Vec3f(1.0, 0.0, 0.0);
+    auto t = hit_sphere(Vec3f(0.0, 0.0, -1.0), 0.5, ray);
+    if (t > 0.0) {
+        auto n = unit_vec(ray.at(t) - Vec3f(0,0,-1));
+        return 0.5 * Vec3f(n.x() + 1, n.y() + 1, n.z() + 1);
     }
     const auto unit_dir = unit_vec<double>(ray.dir());
-    const auto t = 0.5 * (unit_dir.y() + 1.0);
-
+    t = 0.5 * (unit_dir.y() + 1.0);
     return (1.0 - t) * Vec3f(1.0, 1.0, 1.0) + t * Vec3f(0.5, 0.7, 1.0);
 }
 
