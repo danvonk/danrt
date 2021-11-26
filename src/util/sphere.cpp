@@ -33,6 +33,8 @@ auto Sphere::hit(const Ray &r, double t_min, double t_max, HitRecord &rec) const
 
     rec.t = root;
     rec.p = r.at(rec.t);
+    Vec3f outward_n = (rec.p - center) / radius;
+    rec.set_face_normal(r, outward_n);
     rec.n = (rec.p - center) / radius;
     return true;
 }

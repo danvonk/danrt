@@ -1,0 +1,22 @@
+[
+{
+  "directory": "/home/dan/dev/danrt/build",
+  "command": "/usr/bin/c++   -Wall -Wextra -Werror -Wpedantic -std=gnu++20 -o CMakeFiles/danrt.dir/src/main.cpp.o -c /home/dan/dev/danrt/src/main.cpp",
+  "file": "/home/dan/dev/danrt/src/main.cpp"
+},
+{
+  "directory": "/home/dan/dev/danrt/build",
+  "command": "/usr/bin/c++   -Wall -Wextra -Werror -Wpedantic -std=gnu++20 -o CMakeFiles/danrt.dir/src/util/color.cpp.o -c /home/dan/dev/danrt/src/util/color.cpp",
+  "file": "/home/dan/dev/danrt/src/util/color.cpp"
+},
+{
+  "directory": "/home/dan/dev/danrt/build",
+  "command": "/usr/bin/c++   -Wall -Wextra -Werror -Wpedantic -std=gnu++20 -o CMakeFiles/danrt.dir/src/util/ray.cpp.o -c /home/dan/dev/danrt/src/util/ray.cpp",
+  "file": "/home/dan/dev/danrt/src/util/ray.cpp"
+},
+{
+  "directory": "/home/dan/dev/danrt/build",
+  "command": "/usr/bin/c++   -Wall -Wextra -Werror -Wpedantic -std=gnu++20 -o CMakeFiles/danrt.dir/src/util/sphere.cpp.o -c /home/dan/dev/danrt/src/util/sphere.cpp",
+  "file": "/home/dan/dev/danrt/src/util/sphere.cpp"
+}
+]

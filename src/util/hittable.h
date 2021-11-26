@@ -12,6 +12,12 @@ namespace danrt {
         Vec3f p;
         Vec3f n;
         double t;
+        bool front_face;
+
+        auto set_face_normal(const Ray& r, const Vec3f& outward_n) -> void {
+            front_face = dot(r.dir(), outward_n) < 0;
+            n = front_face ? outward_n : -outward_n;
+        }
     };
 
     template <typename T>

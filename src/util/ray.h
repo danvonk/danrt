@@ -28,7 +28,7 @@ namespace danrt {
          * @param t scalar multiple of dir
          * @return point along ray
          */
-        inline auto at(double t) const -> Vec3f {
+        [[nodiscard]] inline auto at(double t) const -> Vec3f {
             return origin_ + t * dir_;
         }
 

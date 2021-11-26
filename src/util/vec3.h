@@ -9,7 +9,6 @@
 #include <concepts>
 #include <cmath>
 
-
 namespace danrt {
     template <std::floating_point T>
     class Vec3 {
